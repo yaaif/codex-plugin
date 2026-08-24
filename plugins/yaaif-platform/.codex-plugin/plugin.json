@@ -1,0 +1,29 @@
+{
+  "name": "yaaif-platform",
+  "version": "0.1.0",
+  "description": "YAAIF platform skills and MCP tools for Codex.",
+  "author": {
+    "name": "YAAIF / BeezLabs",
+    "url": "https://github.com/yaaif"
+  },
+  "homepage": "https://github.com/yaaif/codex-plugin",
+  "repository": "https://github.com/yaaif/codex-plugin",
+  "license": "Apache-2.0",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "YAAIF",
+    "shortDescription": "Build and operate YAAIF workflows from Codex.",
+    "longDescription": "YAAIF connects Codex to the YAAIF platform with authenticated MCP tools and guided skills for planning, MCP servers, skills, scenarios, ambient workflows, diagnostics, and operations support.",
+    "developerName": "YAAIF / BeezLabs",
+    "category": "Developer tools",
+    "brandColor": "#0C7795",
+    "logo": "assets/logo.png",
+    "logoDark": "assets/logo.svg",
+    "capabilities": [
+      "MCP tools",
+      "YAAIF workflow authoring skills"
+    ],
+    "defaultPrompt": "Use YAAIF to authenticate, check platform readiness, and help me plan or implement a workflow."
+  },
+  "mcpServers": "./.mcp.json"
+}

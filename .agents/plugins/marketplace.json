@@ -1,0 +1,20 @@
+{
+  "name": "yaaif",
+  "interface": {
+    "displayName": "YAAIF"
+  },
+  "plugins": [
+    {
+      "name": "yaaif-platform",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaaif-platform"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "development"
+    }
+  ]
+}
