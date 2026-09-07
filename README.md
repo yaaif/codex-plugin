@@ -14,7 +14,7 @@ Install this repository as a local marketplace in Codex, then install the
 The plugin starts:
 
 ```text
-npx -y @yaaif/platform-mcp@1.2.0 --client codex
+npx -y @yaaif/platform-mcp@1.3.0 --client codex
 ```
 
 The process inherits `YAAIF_*` configuration from Codex. Node.js 20 or later is
