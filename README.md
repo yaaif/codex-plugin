@@ -5,10 +5,10 @@ skills for authenticated YAAIF planning, skill creation, MCP deployment,
 scenario lifecycle, ambient workflows, diagnostics, platform tools, and
 read-only operations support.
 
-**Version:** 1.3.0  
+**Version:** 1.3.2  
 **Logo:** [`plugins/yaaif-platform/assets/logo.svg`](plugins/yaaif-platform/assets/logo.svg)
 
-This plugin is on the same **1.3.0** contract as Cursor and Claude Code (nine
+This plugin is on the same **1.3.2** contract as Cursor and Claude Code (nine
 core skills, ten short names, Agent Spec preview/apply). Codex has no
 `userConfig` and no `commands/` directory — short names are alias skills.
 
