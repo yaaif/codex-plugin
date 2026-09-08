@@ -19,13 +19,18 @@ Codex and install the **YAAIF** plugin (`yaaif-platform`). The marketplace
 entry is deliberately `AVAILABLE` with `ON_INSTALL` authentication.
 
 ```bash
-npx -y @yaaif/platform-mcp@1.3.1 --install --client codex
+cd ~
+npx -y @yaaif/platform-mcp@1.3.2 --install --client codex
+git clone https://github.com/yaaif/codex-plugin.git
 ```
+
+Then in Codex add the clone as a local marketplace named **`yaaif`** and install
+**YAAIF** (`yaaif-platform`). Start a new task.
 
 The plugin starts:
 
 ```text
-npx -y @yaaif/platform-mcp@1.3.1 --client codex
+npx -y @yaaif/platform-mcp@1.3.2 --client codex
 ```
 
 The process inherits `YAAIF_*` from Codex. Node.js 20 or later is required.
@@ -34,8 +39,8 @@ login, or `yaaif_login_device` where a browser callback is not available.
 
 > **Note:** `@yaaif/platform-mcp` must be on the public npm registry before a
 > marketplace install can start the bridge. See
-> [docs/npm-publish.md](docs/npm-publish.md). Until then, use a local
-> [monorepo override](#local-mcp-override).
+> [docs/npm-publish.md](docs/npm-publish.md). For bridge development, use a
+> [local MCP override](#local-mcp-override).
 
 ## Profiles and state
 
@@ -83,8 +88,15 @@ Ask Codex to use the skill by name (`$yaaif-login`, “use yaaif-plan”, …).
 
 ## Local MCP override
 
-Until `@yaaif/platform-mcp` is published, or when developing the bridge, point
-Codex at the monorepo build (do not commit this path):
+When developing the bridge, clone [yaaif/cursor-plugin](https://github.com/yaaif/cursor-plugin),
+build `packages/mcp`, and point Codex at that `cli.js` (do not commit a
+machine-local path):
+
+```bash
+git clone https://github.com/yaaif/cursor-plugin.git
+cd cursor-plugin/packages/mcp
+npm install && npm run build
+```
 
 ```json
 {
@@ -92,7 +104,7 @@ Codex at the monorepo build (do not commit this path):
     "yaaif": {
       "command": "node",
       "args": [
-        "/path/to/yaaif-platform/integrations/cursor-plugin/packages/mcp/dist/cli.js",
+        "/path/to/cursor-plugin/packages/mcp/dist/cli.js",
         "--client",
         "codex"
       ]
@@ -100,8 +112,6 @@ Codex at the monorepo build (do not commit this path):
   }
 }
 ```
-
-Build first: `cd integrations/cursor-plugin/packages/mcp && npm install && npm run build`.
 
 ## Development and release
 
