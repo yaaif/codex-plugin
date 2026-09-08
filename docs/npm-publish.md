@@ -4,8 +4,8 @@ The Codex plugin does **not** bundle MCP source. Marketplace and `npx`
 installs start:
 
 ```text
-npx -y @yaaif/platform-mcp@1.3.1 --client codex
-npx -y @yaaif/platform-mcp@1.3.1 --install --client codex
+npx -y @yaaif/platform-mcp@1.3.3 --client codex
+npx -y @yaaif/platform-mcp@1.3.3 --install --client codex
 ```
 
 That package is built from
@@ -38,7 +38,7 @@ returns 404.
    npm view @yaaif/platform-mcp version
    ```
 
-   Expected: `1.3.0` (or the version pinned in this repo’s
+   Expected: `1.3.3` (or the version pinned in this repo’s
    [`plugins/yaaif-platform/.mcp.json`](../plugins/yaaif-platform/.mcp.json)).
 
 3. Keep this plugin’s `.mcp.json` pin in lockstep with the published version.

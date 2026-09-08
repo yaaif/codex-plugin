@@ -20,7 +20,7 @@ entry is deliberately `AVAILABLE` with `ON_INSTALL` authentication.
 
 ```bash
 cd ~
-npx -y @yaaif/platform-mcp@1.3.2 --install --client codex
+npx -y @yaaif/platform-mcp@1.3.3 --install --client codex
 git clone https://github.com/yaaif/codex-plugin.git
 ```
 
@@ -30,7 +30,7 @@ Then in Codex add the clone as a local marketplace named **`yaaif`** and install
 The plugin starts:
 
 ```text
-npx -y @yaaif/platform-mcp@1.3.2 --client codex
+npx -y @yaaif/platform-mcp@1.3.3 --client codex
 ```
 
 The process inherits `YAAIF_*` from Codex. Node.js 20 or later is required.
