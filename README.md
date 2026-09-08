@@ -5,26 +5,42 @@ skills for authenticated YAAIF planning, skill creation, MCP deployment,
 scenario lifecycle, ambient workflows, diagnostics, platform tools, and
 read-only operations support.
 
+**Version:** 1.3.0  
+**Logo:** [`plugins/yaaif-platform/assets/logo.svg`](plugins/yaaif-platform/assets/logo.svg)
+
+This plugin is on the same **1.3.0** contract as Cursor and Claude Code (nine
+core skills, ten short names, Agent Spec preview/apply). Codex has no
+`userConfig` and no `commands/` directory — short names are alias skills.
+
 ## Install
 
-Install this repository as a local marketplace in Codex, then install the
-**YAAIF** plugin (`yaaif-platform`). The marketplace entry is deliberately
-`AVAILABLE` with `ON_INSTALL` authentication.
+Optional profile + login, then add this repository as a local marketplace in
+Codex and install the **YAAIF** plugin (`yaaif-platform`). The marketplace
+entry is deliberately `AVAILABLE` with `ON_INSTALL` authentication.
+
+```bash
+npx -y @yaaif/platform-mcp@1.3.1 --install --client codex
+```
 
 The plugin starts:
 
 ```text
-npx -y @yaaif/platform-mcp@1.3.0 --client codex
+npx -y @yaaif/platform-mcp@1.3.1 --client codex
 ```
 
-The process inherits `YAAIF_*` configuration from Codex. Node.js 20 or later is
-required. Run `yaaif_ensure_session` in a new task to use browser PKCE login,
-or `yaaif_login_device` where browser callback login is not available.
+The process inherits `YAAIF_*` from Codex. Node.js 20 or later is required.
+Run `yaaif-login` (or `yaaif_ensure_session`) in a new task for browser PKCE
+login, or `yaaif_login_device` where a browser callback is not available.
+
+> **Note:** `@yaaif/platform-mcp` must be on the public npm registry before a
+> marketplace install can start the bridge. See
+> [docs/npm-publish.md](docs/npm-publish.md). Until then, use a local
+> [monorepo override](#local-mcp-override).
 
 ## Profiles and state
 
 Codex uses `~/.yaaif/codex` exclusively. It never reads or overwrites Cursor
-state in `~/.yaaif/cursor`.
+state in `~/.yaaif/cursor` or Claude state in `~/.yaaif/claude`.
 
 | Profile | Intended use |
 | --- | --- |
@@ -32,9 +48,8 @@ state in `~/.yaaif/cursor`.
 | `local` | OIDC and APIs on the local stack |
 | `local-hybrid` | Hosted/tunnel OIDC with local APIs |
 
-Override endpoints, tenant, CA, and mTLS with the existing `YAAIF_*`
-environment variables. In particular, use `YAAIF_EXTRA_CA_FILE` for a local CA
-and `YAAIF_CLIENT_CERT_FILE` / `YAAIF_CLIENT_KEY_FILE` for mTLS.
+Override endpoints, tenant, CA, and mTLS with `YAAIF_*` environment variables
+or `~/.yaaif/codex/profiles.json`.
 
 ## Admin UI handoffs
 
@@ -49,30 +64,54 @@ prompt via `codex://threads/new?prompt=…`.
 | Ambient workflows | `yaaif-create-ambient` | `workflow_id`, `agent_id` |
 | Agents | MCP agent tools | `agent_id`, `agent_type` |
 
-Install this plugin before using Admin UI handoffs. Authenticate with
-`yaaif-auth`, then follow the skill named in the prompt. Codex state stays in
-`~/.yaaif/codex` and never shares Cursor profiles.
+## Skills and aliases
 
-## Skills
+Ask Codex to use the skill by name (`$yaaif-login`, “use yaaif-plan”, …).
 
-| Skill | Purpose |
-| --- | --- |
-| `yaaif-auth` | Platform profile + login + tenant |
-| `yaaif-doctor` | Connectivity / TLS / auth diagnostics |
-| `yaaif-plan-usecase` | Use-case plan → approve → create Scenario + agents/skills/workflows |
-| `yaaif-scenario` | Create or maintain a Scenario (Agent Spec); Admin UI **Open in Codex** |
-| `yaaif-create-skill` | Author + load skill (prefers platform local lifecycle tools) |
-| `yaaif-platform-tools` | Discover/call agent-service built-in local tools |
-| `yaaif-ops-support` | Read-only incident triage (session/ambient/desktop) |
-| `yaaif-create-mcp` | Scaffold + deploy MCP (compose or k8s GitOps) + API key bind |
-| `yaaif-create-ambient` | Ambient workflows; Admin UI **Open in Codex** for `workflow_id` |
+| Skill | Short alias | Purpose |
+| --- | --- | --- |
+| `yaaif-auth` | `yaaif-login` | Platform profile + login + tenant |
+| `yaaif-doctor` | `yaaif-doctor` | Connectivity / TLS / auth diagnostics |
+| `yaaif-plan-usecase` | `yaaif-plan` | Use-case plan → approve → create Scenario + objects |
+| `yaaif-scenario` | `yaaif-scenario` | Create or maintain a Scenario; Admin UI **Open in Codex** |
+| — | `yaaif-sync-scenario` | Apply spec → objects, or explicitly adopt live drift |
+| `yaaif-create-skill` | `yaaif-new-skill` | Author + load skill |
+| `yaaif-create-mcp` | `yaaif-new-mcp` | Scaffold + deploy MCP + API key bind |
+| `yaaif-create-ambient` | `yaaif-new-workflow` | Ambient workflows |
+| `yaaif-platform-tools` | `yaaif-platform-tools` | Discover/call agent-service built-in local tools |
+| `yaaif-ops-support` | `yaaif-ops` | Read-only incident triage |
+
+## Local MCP override
+
+Until `@yaaif/platform-mcp` is published, or when developing the bridge, point
+Codex at the monorepo build (do not commit this path):
+
+```json
+{
+  "mcpServers": {
+    "yaaif": {
+      "command": "node",
+      "args": [
+        "/path/to/yaaif-platform/integrations/cursor-plugin/packages/mcp/dist/cli.js",
+        "--client",
+        "codex"
+      ]
+    }
+  }
+}
+```
+
+Build first: `cd integrations/cursor-plugin/packages/mcp && npm install && npm run build`.
 
 ## Development and release
 
-Before installing a release candidate, use Codex’s `plugin-creator` validator
-against `plugins/yaaif-platform` and verify that `.agents/plugins/marketplace.json`
-still names the `yaaif` marketplace with the `AVAILABLE` / `ON_INSTALL` policy.
+```bash
+python3 scripts/check-plugin.py --require-skill-sync
+```
 
-Release order is: publish `@yaaif/platform-mcp`, publish the compatibility
-`@yaaif/cursor-mcp` wrapper, install and smoke-test this local marketplace,
-then submit the tested repository to the OpenAI plugin directory.
+Release order: publish `@yaaif/platform-mcp@<version>` from `cursor-plugin` →
+confirm with `npm view` → keep the pin in
+[`plugins/yaaif-platform/.mcp.json`](plugins/yaaif-platform/.mcp.json) →
+smoke-test this local marketplace → submit to the OpenAI plugin directory.
+
+See [CHANGELOG.md](CHANGELOG.md) and [docs/npm-publish.md](docs/npm-publish.md).

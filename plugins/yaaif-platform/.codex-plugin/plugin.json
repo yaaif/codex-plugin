@@ -1,24 +1,34 @@
 {
   "name": "yaaif-platform",
-  "version": "0.1.0",
-  "description": "YAAIF platform skills and MCP tools for Codex.",
+  "version": "1.3.0",
+  "description": "Authenticate to YAA\\F, plan use cases, create and maintain scenarios (Agent Specs), and create skills, MCP deployments, and ambient workflows from Codex.",
   "author": {
-    "name": "YAAIF / BeezLabs",
+    "name": "YAA\\F / BeezLabs",
+    "email": "support@yaaif.com",
     "url": "https://github.com/yaaif"
   },
   "homepage": "https://github.com/yaaif/codex-plugin",
   "repository": "https://github.com/yaaif/codex-plugin",
   "license": "Apache-2.0",
+  "keywords": [
+    "yaaif",
+    "skills",
+    "mcp",
+    "ambient",
+    "workflows",
+    "keycloak",
+    "sap"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "YAAIF",
     "shortDescription": "Build and operate YAAIF workflows from Codex.",
     "longDescription": "YAAIF connects Codex to the YAAIF platform with authenticated MCP tools and guided skills for planning, MCP servers, skills, scenarios, ambient workflows, diagnostics, and operations support.",
-    "developerName": "YAAIF / BeezLabs",
+    "developerName": "YAA\\F / BeezLabs",
     "category": "Developer tools",
     "brandColor": "#0C7795",
-    "logo": "assets/logo.png",
-    "logoDark": "assets/logo.svg",
+    "logo": "./assets/logo.svg",
+    "logoDark": "./assets/logo.svg",
     "capabilities": [
       "MCP tools",
       "YAAIF workflow authoring skills"
