@@ -88,13 +88,13 @@ Ask Codex to use the skill by name (`$yaaif-login`, “use yaaif-plan”, …).
 
 ## Local MCP override
 
-When developing the bridge, clone [yaaif/cursor-plugin](https://github.com/yaaif/cursor-plugin),
-build `packages/mcp`, and point Codex at that `cli.js` (do not commit a
+When developing the bridge, clone [yaaif/platform-mcp](https://github.com/yaaif/platform-mcp),
+build it, and point Codex at that `cli.js` (do not commit a
 machine-local path):
 
 ```bash
-git clone https://github.com/yaaif/cursor-plugin.git
-cd cursor-plugin/packages/mcp
+git clone https://github.com/yaaif/platform-mcp.git
+cd platform-mcp
 npm install && npm run build
 ```
 
@@ -104,7 +104,7 @@ npm install && npm run build
     "yaaif": {
       "command": "node",
       "args": [
-        "/path/to/cursor-plugin/packages/mcp/dist/cli.js",
+        "/path/to/platform-mcp/dist/cli.js",
         "--client",
         "codex"
       ]
@@ -119,7 +119,7 @@ npm install && npm run build
 python3 scripts/check-plugin.py --require-skill-sync
 ```
 
-Release order: publish `@yaaif/platform-mcp@<version>` from `cursor-plugin` →
+Release order: publish `@yaaif/platform-mcp@<version>` from [yaaif/platform-mcp](https://github.com/yaaif/platform-mcp) →
 confirm with `npm view` → keep the pin in
 [`plugins/yaaif-platform/.mcp.json`](plugins/yaaif-platform/.mcp.json) →
 smoke-test this local marketplace → submit to the OpenAI plugin directory.

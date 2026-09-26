@@ -17,7 +17,7 @@ This Codex plugin ships:
 - Shared Node installer: `npx @yaaif/platform-mcp --install --client codex` (optional `--offline`)
 
 It does **not** ship opaque binaries, remote install scripts, or embedded credentials. The MCP bridge itself is a shared package (source in
-[`cursor-plugin/packages/mcp`](https://github.com/yaaif/cursor-plugin/tree/main/packages/mcp)) used identically by the Cursor, Codex, and Claude Code plugins.
+[`yaaif/platform-mcp`](https://github.com/yaaif/platform-mcp)) used identically by the Cursor, Codex, and Claude Code plugins.
 
 ### Auth
 
