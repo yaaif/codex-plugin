@@ -21,6 +21,7 @@ EXPECTED_SKILLS = (
     "yaaif-ops-support",
     "yaaif-plan-usecase",
     "yaaif-platform-tools",
+    "yaaif-requirements",
     "yaaif-scenario",
 )
 
