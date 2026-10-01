@@ -18,6 +18,8 @@ EXPECTED_SKILLS = (
     "yaaif-create-mcp",
     "yaaif-create-skill",
     "yaaif-doctor",
+    "yaaif-kg-enhance",
+    "yaaif-kg-skill-plan",
     "yaaif-ops-support",
     "yaaif-plan-usecase",
     "yaaif-platform-tools",
