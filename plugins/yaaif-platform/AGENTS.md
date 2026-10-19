@@ -19,3 +19,5 @@ YAAIF Admin UI **Open in Codex** launches `codex://threads/new?prompt=…` with 
 
 - Stay in Codex. Do not open Admin UI or browser URLs for the same object.
 - Load the matching bundled skill (`yaaif-scenario`, `yaaif-create-skill`, `yaaif-create-ambient`, or agent APIs) and maintain the selected catalog object — do not create duplicates.
+
+For tenant guardrails, harness settings, budgets, agent policy assignments or policy-related failure remediation, use `yaaif-governance`. Discover effective permissions first; preview changes and obtain explicit confirmation of the exact proposal before apply.
