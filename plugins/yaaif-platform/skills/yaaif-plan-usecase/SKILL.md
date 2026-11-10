@@ -189,6 +189,10 @@ Update the plan file's execution checklist with created ids as you go.
 - Ambient graphs use workflow + ambient agents; chat orchestration skills map to
   the chat agent that should trigger the workflow.
 
+## Cross-server copy
+
+Use `yaaif_agent_copy` with source/destination profile ids when moving an agent definition. Preview first, then confirm. It preserves prompt, description and agent type, drops skill mappings and Scenario bindings, and creates the destination disabled for review. For a selected catalog, use `yaaif_catalog_copy` with the same dependency order and conflict protection.
+
 ## Hand-off
 
 Report:

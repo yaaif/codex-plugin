@@ -1,6 +1,6 @@
 {
   "name": "yaaif-platform",
-  "version": "1.3.3",
+  "version": "1.7.0",
   "description": "Authenticate to YAA\\F, plan use cases, create and maintain scenarios (Agent Specs), and create skills, MCP deployments, and ambient workflows from Codex; manage tenant governance through confirmed policy proposals.",
   "author": {
     "name": "YAA\\F / BeezLabs",

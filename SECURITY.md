@@ -4,6 +4,8 @@
 
 | Version | Supported |
 |---------|-----------|
+| `1.7.x` | Yes |
+| `1.4.x` | Yes |
 | `1.3.x` | Yes |
 | `1.1.x` | No |
 | `0.1.x` | No |
@@ -28,6 +30,7 @@ It does **not** ship opaque binaries, remote install scripts, or embedded creden
 - API calls send `Authorization: Bearer` + `X-Tenant-ID` only
 - Does **not** use platform S2S secrets, desktop connection keys, or AI-gateway keys
 - Tenant **API keys** (`yaaif_api_key_*`) are the supported credential for MCP → platform APIs
+- External secrets use write-only `yaaif_credential_*` values plus MCP server profiles/mappings (`yaaif_mcp_credential_*`); responses expose metadata only, and skill packs never contain `credentials.yaml` or secret values
 - State is fully isolated from Cursor (`~/.yaaif/cursor`) and Claude (`~/.yaaif/claude`)
 
 ### MCP surface

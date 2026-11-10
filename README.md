@@ -5,10 +5,10 @@ skills for authenticated YAAIF planning, skill creation, MCP deployment,
 scenario lifecycle, ambient workflows, diagnostics, platform tools, and
 read-only operations support.
 
-**Version:** 1.3.2  
+**Version:** 1.7.0
 **Logo:** [`plugins/yaaif-platform/assets/logo.svg`](plugins/yaaif-platform/assets/logo.svg)
 
-This plugin is on the same **1.3.2** contract as Cursor and Claude Code (nine
+This plugin is on the same **1.7.0** contract as Cursor and Claude Code (nine
 core skills, ten short names, Agent Spec preview/apply). Codex has no
 `userConfig` and no `commands/` directory — short names are alias skills.
 
@@ -20,17 +20,20 @@ entry is deliberately `AVAILABLE` with `ON_INSTALL` authentication.
 
 ```bash
 cd ~
-npx -y @yaaif/platform-mcp@1.3.5 --install --client codex
-git clone https://github.com/yaaif/codex-plugin.git
+npx -y @yaaif/platform-mcp@1.7.0 --install --client codex
 ```
 
-Then in Codex add the clone as a local marketplace named **`yaaif`** and install
-**YAAIF** (`yaaif-platform`). Start a new task.
+The installer downloads the matching `v1.7.0` source into
+`~/.yaaif/codex/plugin`. Add that directory as a local marketplace named
+**`yaaif`** and install **YAAIF** (`yaaif-platform`). Start a new task. Use
+`--plugin-src` for a checkout, `--plugin-ref` for another ref,
+`--plugin-sha256` for archive verification, or `--plugin-source-base-url` for
+an enterprise mirror.
 
 The plugin starts:
 
 ```text
-npx -y @yaaif/platform-mcp@1.3.5 --client codex
+npx -y @yaaif/platform-mcp@1.7.0 --client codex
 ```
 
 The process inherits `YAAIF_*` from Codex. Node.js 20 or later is required.
@@ -45,7 +48,10 @@ login, or `yaaif_login_device` where a browser callback is not available.
 ## Profiles and state
 
 Codex uses `~/.yaaif/codex` exclusively. It never reads or overwrites Cursor
-state in `~/.yaaif/cursor` or Claude state in `~/.yaaif/claude`.
+state in `~/.yaaif/cursor` or Claude state in `~/.yaaif/claude`. Successful
+updates remove older versioned caches under `~/.codex/plugins/cache/yaaif/yaaif-platform/`
+and move them to `~/.yaaif/codex/plugin-backups/`; use `--keep-old-versions`
+to retain them. Failed installation or verification restores the previous managed source and launcher configuration.
 
 | Profile | Intended use |
 | --- | --- |
